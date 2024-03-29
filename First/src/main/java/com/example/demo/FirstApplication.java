@@ -12,8 +12,7 @@ public class FirstApplication {
 		
 		// spring bean
 		Student s1 = app.getBean(Student.class);
-		Student s2 = app.getBean(Student.class);
-
+		s1.show();
 	}
 
 }

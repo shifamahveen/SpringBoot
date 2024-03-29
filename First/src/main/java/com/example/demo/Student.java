@@ -1,14 +1,21 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Scope(value="prototype")
 public class Student {
 	private int id;
 	private String name; 
 	private String batch;
+	
+	// loose coupling
+	// obj of Course
+	@Autowired
+	@Qualifier("c1")
+	private Course c1;
 	
 	// constructor
 	public Student() {
@@ -36,6 +43,7 @@ public class Student {
 	}
 	
 	public void show() {
+		c1.read();
 		System.out.println("Inside student class");
 	}
 	
