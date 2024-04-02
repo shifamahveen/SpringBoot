@@ -12,6 +12,14 @@ public class FirstApplication {
 		
 		// spring bean
 		Student s1 = app.getBean(Student.class);
+		
+		s1.setId(1);
+		s1.setName("Tarun");
+		s1.setBatch("BH07");
+	
+		Course course1 = app.getBean(Course.class);
+		s1.setC1(course1);
+		
 		s1.show();
 	}
 

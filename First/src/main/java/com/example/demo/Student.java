@@ -41,10 +41,20 @@ public class Student {
 	public void setBatch(String batch) {
 		this.batch = batch;
 	}
-	
+	public Course getC1() {
+		return c1;
+	}
+	public void setC1(Course c1) {
+		this.c1 = c1;
+	}
 	public void show() {
 		c1.read();
-		System.out.println("Inside student class");
+		System.out.println("Student details are: ");
+		System.out.println("ID: "+id);
+		System.out.println("Name: "+name);
+		System.out.println("Batch: "+batch);
+		System.out.println("Course details: "+c1.toString());
+
 	}
 	
 	
