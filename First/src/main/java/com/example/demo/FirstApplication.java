@@ -11,16 +11,16 @@ public class FirstApplication {
 		ConfigurableApplicationContext app = SpringApplication.run(FirstApplication.class, args);
 		
 		// spring bean
-		Student s1 = app.getBean(Student.class);
+		Dept dept = app.getBean(Dept.class);
 		
-		s1.setId(1);
-		s1.setName("Tarun");
-		s1.setBatch("BH07");
-	
-		Course course1 = app.getBean(Course.class);
-		s1.setC1(course1);
+		dept.setDeptno(10);
+		dept.setDname("Research");
 		
-		s1.show();
+		Emp emp = new Emp(dept);
+		emp.setId(1);
+		emp.setName("Karthik");
+		
+		emp.show();
 	}
 
 }
