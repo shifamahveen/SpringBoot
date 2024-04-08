@@ -8,19 +8,7 @@
 
 </head>
 <body>
-	<h1 style="font-weight: 800; font-size: 50px;">Enter the details</h1>
-	
-	 <form action="profile" method="get">
-        Name: <br>
-        <input type="text" name="name">
-
-        <br>
-        Batch: <br>
-        <input type="text" name="batch">
-
-        <br>
-        <input type="submit" value="Send">
-    </form>
+	<p>You have entered <b>Name: ${fullname}</b> and <b>Batch: ${batch}</b></p>
 	
 </body>
 </html>
