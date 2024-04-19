@@ -1,13 +1,19 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import java.util.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class TrigController {
+	
+	@Autowired
+	private JdbcTemplate template;
 
 	@RequestMapping("index")
 	public String home() {
@@ -43,10 +49,29 @@ public class TrigController {
 			default: break;
 		}
 		
+		String sql = "insert into trig (func, angle, result) values (?,?,?)";
+		template.update(sql, func, a, result);
+		
 		session.setAttribute("angle", a);
 		session.setAttribute("func", func);
 		session.setAttribute("result", result);
 		
 		return "result.jsp";
+	}
+	
+	@RequestMapping("records")
+	public String getRecords(Model model) {
+		List<Trig> trigRecords = template.query(
+				"select * from trig",
+				(rs, rowNum) -> new Trig(
+					rs.getString("func"),
+					rs.getInt("angle"),
+					rs.getDouble("result")
+				)
+			);
+		
+		model.addAttribute("records",trigRecords);
+		
+		return "records.jsp";
 	}
 }

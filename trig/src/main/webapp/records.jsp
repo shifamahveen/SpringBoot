@@ -6,18 +6,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <title>First JSP</title>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <body>
-	<section class="container p-4 rounded shadow border border-secondary my-5 w-50 text-center" >
-		<h1> Entered values are </h1>
-		<p>Angle: ${angle}, Function: ${func} </p>
-		<p class="text-primary">The result is: <b>${result}</b> </p>
+	<table>
+		<thead>
+			<th>Trig Function</th>
+			<th>Angle</th>
+			<th>Result</th>
+		</thead>
+		<tbody>
 		
-		<a href="/index" class="bg-success text-white p-2"> Back to Home </a>
-		<a href="/records" class="bg-primary text-white p-2"> View Records </a>
-		
-	</section
-	
+			<c:forEach var="i" items="${records}">
+				<tr>
+					<td>${i.func}</td>
+					<td>${i.angle}</td>
+					<td>${i.result}</td>
+				</tr>
+			</c:forEach>
+		</tbody	
+	</table>
 </body>
 </html>
