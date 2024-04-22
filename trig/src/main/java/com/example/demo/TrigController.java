@@ -64,7 +64,7 @@ public class TrigController {
 		List<Trig> trigRecords = template.query(
 				"select * from trig",
 				(rs, rowNum) -> new Trig(
-					rs.getString("func"),
+					rowNum, rs.getString("func"),
 					rs.getInt("angle"),
 					rs.getDouble("result")
 				)
@@ -73,5 +73,17 @@ public class TrigController {
 		model.addAttribute("records",trigRecords);
 		
 		return "records.jsp";
+	}
+	
+	@RequestMapping("delete")
+	public String deleteRecord(int id) {
+		String sql = "delete from trig where id = ?";
+		int status = template.update(sql,id);
+		
+		if(status > 0) {
+			return "redirect:/records";
+		} else {
+			return "error.jsp";
+		}
 	}
 }

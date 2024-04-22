@@ -9,22 +9,25 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <body>
-	<table>
+	<table class="mx-auto mt-5">
 		<thead>
-			<th>Trig Function</th>
-			<th>Angle</th>
-			<th>Result</th>
+			<th class="border p-2">Trig Function</th>
+			<th class="border p-2">Angle</th>
+			<th class="border p-2">Result</th>
+			<th class="border p-2">Delete</th>
 		</thead>
 		<tbody>
-		
 			<c:forEach var="i" items="${records}">
 				<tr>
-					<td>${i.func}</td>
-					<td>${i.angle}</td>
-					<td>${i.result}</td>
+					<td class="border p-2">${i.func}</td>
+					<td class="border p-2">${i.angle}</td>
+					<td class="border p-2">${i.result}</td>
+					<td class="border p-2">
+						<a href="/delete?id=${i.id}" class="bg-danger p-2 rounded text-decoration-none text-white">Delete</a>
+					</td>
 				</tr>
 			</c:forEach>
-		</tbody	
+		</tbody>                    
 	</table>
 </body>
 </html>

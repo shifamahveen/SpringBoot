@@ -7,8 +7,9 @@ public class Trig {
 	private double result;
 	
 	// parameterized constructor	
-	public Trig(String func, int angle, double result) {
+	public Trig(int id, String func, int angle, double result) {
 		super();
+		this.id = id;
 		this.func = func;
 		this.angle = angle;
 		this.result = result;
