@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,7 +65,8 @@ public class TrigController {
 		List<Trig> trigRecords = template.query(
 				"select * from trig",
 				(rs, rowNum) -> new Trig(
-					rowNum, rs.getString("func"),
+					rs.getInt("id"),
+					rs.getString("func"),
 					rs.getInt("angle"),
 					rs.getDouble("result")
 				)
@@ -85,5 +87,31 @@ public class TrigController {
 		} else {
 			return "error.jsp";
 		}
+	}
+	
+	@RequestMapping("edit")
+	public String edit(int id, Model model) {
+		@SuppressWarnings("deprecation")
+		Trig record = template.queryForObject("select * from trig where id = ?", 
+				new Object[]{id},
+				(rs, rowNum) -> new Trig(
+						rs.getInt("id"),
+						rs.getString("func"),
+						rs.getInt("angle"),
+						rs.getDouble("result")
+				)
+		);
+		
+		model.addAttribute("obj",record);
+		
+		return "edit.jsp";
+	}
+	
+	@RequestMapping("update")
+	public String updateRecord(@ModelAttribute Trig trig) {	
+		String sql = "update trig set angle=?, func=?, result=? where id=?";
+		template.update(sql, trig.getAngle(), trig.getFunc(), trig.getResult(), trig.getId());
+		
+		return "redirect:/records";
 	}
 }

@@ -9,22 +9,36 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 </head>
 <body>
-	<table class="mx-auto mt-5">
+	
+	<div class="d-flex justify-content-between my-1 mt-5 mx-auto" style="width: 40vw;">
+		<h3> Trigonometry Application </h3>
+		<a href="/index" class="btn btn-success p-2 px-4 rounded shadow">Create</a>
+	</div>
+
+	<table class="mx-auto mt-5" style="width: 40vw;">
 		<thead>
+			<th class="border p-2">ID</th>
 			<th class="border p-2">Trig Function</th>
 			<th class="border p-2">Angle</th>
 			<th class="border p-2">Result</th>
 			<th class="border p-2">Delete</th>
+			<th class="border p-2">Edit</th>
+			
 		</thead>
 		<tbody>
 			<c:forEach var="i" items="${records}">
 				<tr>
+					<td class="border p-2">${i.id}</td>
 					<td class="border p-2">${i.func}</td>
 					<td class="border p-2">${i.angle}</td>
 					<td class="border p-2">${i.result}</td>
 					<td class="border p-2">
-						<a href="/delete?id=${i.id}" class="bg-danger p-2 rounded text-decoration-none text-white">Delete</a>
+						<a href="/delete?id=${i.id}" class="btn btn-outline-primary p-2 rounded text-decoration-none ">Delete</a>
 					</td>
+					<td class="border p-2">
+						<a href="/edit?id=${i.id}" class="btn btn-outline-info p-2 rounded text-decoration-none">Edit</a>
+					</td>
+					
 				</tr>
 			</c:forEach>
 		</tbody>                    

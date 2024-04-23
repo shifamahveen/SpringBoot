@@ -14,8 +14,8 @@
 		<p>Angle: ${angle}, Function: ${func} </p>
 		<p class="text-primary">The result is: <b>${result}</b> </p>
 		
-		<a href="/index" class="bg-success text-white p-2"> Back to Home </a>
-		<a href="/records" class="bg-primary text-white p-2"> View Records </a>
+		<a href="/index" class="bg-success text-white p-2 text-decoration-none rounded mx-3"> Back to Home </a>
+		<a href="/records" class="bg-primary text-white p-2 text-decoration-none rounded mx-3"> View Records </a>
 		
 	</section
 	

@@ -11,27 +11,30 @@
 <body>
 
 	<section class="container p-4 rounded shadow border border-secondary my-5 w-50" >
-		<h1 class="fs-2 text-center">Enter the values</h1>
+		<h1 class="fs-2 text-center">Edit the values</h1>
 		
-		<form action="calculate" method="post">
+		<form action="update" method="post">
+		
+			<div class="form-group my-2">
+				<input type="hidden" name="id" class="form-control" value="${obj.id}"/>
+			</div>
+			
 			<div  class="form-group my-2">
 				<label>Angle: </label>
-				<input type="text" name="angle" class="form-control" />
+				<input type="text" name="angle" class="form-control" value="${obj.angle}" />
 			</div>
 			
 			<div class="form-group my-2">
 				<label>Trig function: </label>
-				<select name="func" class="form-control">
-					<option value="sin">sin</option>
-					<option value="cos">cos</option>
-					<option value="tan">tan</option>
-					<option value="cot">cot</option>
-					<option value="sec">sec</option>
-					<option value="cosec">cosec</option>
-				</select>
+				<input type="text" name="func" class="form-control" value="${obj.func}" />
 			</div>
 			
-			<input type="submit" value="Calculate" class="btn btn-info text-white p-2 rounded border-0 d-block mx-auto my-3" />
+			<div class="form-group my-2">
+				<label>Result: </label>
+				<input type="text" name="result" class="form-control" value="${obj.result}" />
+			</div>
+			
+			<input type="submit" value="Update" class="btn btn-outline-info p-2 rounded d-block mx-auto my-3" />
 		</form>
 	
 		
