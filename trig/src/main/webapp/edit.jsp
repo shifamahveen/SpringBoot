@@ -13,11 +13,10 @@
 	<section class="container p-4 rounded shadow border border-secondary my-5 w-50" >
 		<h1 class="fs-2 text-center">Edit the values</h1>
 		
-		<form action="update" method="post">
-		
-			<div class="form-group my-2">
-				<input type="hidden" name="id" class="form-control" value="${obj.id}"/>
-			</div>
+		<form action="/update" method="POST">
+	
+			<input type="hidden" name="_method" value="PUT" />
+			<input type="hidden" name="id" class="form-control" value="${obj.id}"/>
 			
 			<div  class="form-group my-2">
 				<label>Angle: </label>
@@ -34,11 +33,10 @@
 				<input type="text" name="result" class="form-control" value="${obj.result}" />
 			</div>
 			
-			<input type="submit" value="Update" class="btn btn-outline-info p-2 rounded d-block mx-auto my-3" />
+			<button type="submit">Update</button>
 		</form>
 	
-		
-	</section>
+		</section>
 	
 </body>
 </html>

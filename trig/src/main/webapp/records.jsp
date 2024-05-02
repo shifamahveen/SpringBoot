@@ -10,11 +10,13 @@
 </head>
 <body>
 	
+	<a href="logout"> Logout </a>
+	<br>
 	<div class="d-flex justify-content-between my-1 mt-5 mx-auto" style="width: 40vw;">
 		<h3> Trigonometry Application </h3>
 		<a href="/index" class="btn btn-success p-2 px-4 rounded shadow">Create</a>
 	</div>
-
+	
 	<table class="mx-auto mt-5" style="width: 40vw;">
 		<thead>
 			<th class="border p-2">ID</th>
@@ -33,7 +35,10 @@
 					<td class="border p-2">${i.angle}</td>
 					<td class="border p-2">${i.result}</td>
 					<td class="border p-2">
-						<a href="/delete?id=${i.id}" class="btn btn-outline-primary p-2 rounded text-decoration-none ">Delete</a>
+						<form action="/delete/${i.id}" method="POST">
+							<input type="hidden" name="_method" value="DELETE" >
+							<button type="submit">delete</button>
+						</form>
 					</td>
 					<td class="border p-2">
 						<a href="/edit?id=${i.id}" class="btn btn-outline-info p-2 rounded text-decoration-none">Edit</a>
