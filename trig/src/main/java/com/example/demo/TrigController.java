@@ -71,20 +71,25 @@ public class TrigController {
 	}
 	
 	@GetMapping("records")
-	public String getRecords(Model model) {
-		List<Trig> trigRecords = template.query(
-				"select * from trig",
-				(rs, rowNum) -> new Trig(
-					rs.getInt("id"),
-					rs.getString("func"),
-					rs.getInt("angle"),
-					rs.getDouble("result")
-				)
-			);
-		
-		model.addAttribute("records",trigRecords);
-		
-		return "records.jsp";
+	public String getRecords(Model model, HttpServletRequest req) {
+		if(isLoggedIn(req)) {
+			List<Trig> trigRecords = template.query(
+					"select * from trig",
+					(rs, rowNum) -> new Trig(
+						rs.getInt("id"),
+						rs.getString("func"),
+						rs.getInt("angle"),
+						rs.getDouble("result")
+					)
+				);
+			
+			model.addAttribute("records",trigRecords);
+			
+			return "records.jsp";
+		}
+		else {
+			return "login.jsp";
+		}
 	}
 
 	@GetMapping("edit")
@@ -126,9 +131,17 @@ public class TrigController {
 	}
 	
 	@GetMapping("sort")
-	public String sort(Model model) {
+	public String sort(Model model, HttpServletRequest req) {
+		String orderFunc = req.getParameter("sortby");
+		String sql;
+		if(orderFunc.equals("asc")) {
+			sql = "select * from trig order by angle";
+		}
+		else {
+			sql = "select * from trig order by angle desc";
+		}
 		List<Trig> trigRecords = template.query(
-				"select * from trig order by angle",
+				sql,
 				(rs, rowNum) -> new Trig(
 					rs.getInt("id"),
 					rs.getString("func"),
@@ -136,6 +149,26 @@ public class TrigController {
 					rs.getDouble("result")
 				)
 			);
+		
+		model.addAttribute("records",trigRecords);
+		
+		return "records.jsp";
+	}
+	
+	@GetMapping("search")
+	public String search(Model model, HttpServletRequest req) {
+		String value = req.getParameter("searchValue");
+//		String sql = "select * from trig where func like ?";
+		@SuppressWarnings({ "unchecked", "deprecation" })
+		List<Trig> trigRecords = (List<Trig>) template.query("select * from trig where func like ?", 
+				new String[] { "%" + value + "%" },
+				(rs, rowNum) -> new Trig(
+						rs.getInt("id"),
+						rs.getString("func"),
+						rs.getInt("angle"),
+						rs.getDouble("result")
+				)
+		);
 		
 		model.addAttribute("records",trigRecords);
 		
